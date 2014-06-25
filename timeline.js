@@ -34,7 +34,7 @@
         }
         locations = locations.map(map);
         locations = locations.filter(filter);
-        console.log(file);
+        console.log(locations);
     }
 
     function drawTimeline(timeline) {

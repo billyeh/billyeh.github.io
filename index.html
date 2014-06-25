@@ -1,36 +1,36 @@
 Hello world
 
 <script>
-/*********************************************/
-Configuration options
-/*********************************************/
-var logFile = "https://dl.dropboxusercontent.com/u/30426053/hellopip.log";
-var startTime = 3000;
+(function () {
 
-function readTextFile(file, cb)
-{
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.status === 200 || rawFile.status == 0)
-        {
-            var allText = rawFile.responseText;
-            cb(allText);
+    /*********************************************
+    Configuration options
+    *********************************************/
+    var logFile = "https://dl.dropboxusercontent.com/u/30426053/hellopip.log";
+    var startTime = 3000;
+
+    function readTextFile(file, cb) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.status === 200 || rawFile.status === 0) {
+                var allText = rawFile.responseText;
+                cb(allText);
+            }
         }
     }
-    rawFile.send(null);
-}
 
-function processFile(file) {
-    var locations = JSON.parse(file);
-    console.log(file);
-}
+    function processFile(file) {
+        var locations = JSON.parse(file);
+        locations = locations.filter(function(loc) {return loc["time"] > startTime;});
+        console.log(file);
+    }
 
-function drawTimeline(timeline) {
+    function drawTimeline(timeline) {
 
-}
+    }
 
-readTextFile(logFile, processFile);
+    readTextFile(logFile, processFile);
+
+}());
 </script>
-

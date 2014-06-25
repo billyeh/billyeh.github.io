@@ -22,6 +22,7 @@
         var locations = JSON.parse(file);
         function map(loc) {
             var time = loc["time"];
+            if (time === undefined) { return; }
             loc["time"] = parseInt(time.toString().substring(time.length() - 4, time.length()));
         }
         function filter(loc) {

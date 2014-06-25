@@ -22,7 +22,7 @@ Hello world
 
     function processFile(file) {
         var locations = JSON.parse(file);
-        locations = locations.filter(function(loc) {return loc["time"] > startTime;});
+        locations = locations.filter(function(loc) {return parseInt(loc["time"]) > startTime;});
         console.log(file);
     }
 

@@ -1,1 +1,20 @@
 Hello world
+
+<script>
+function readTextFile(file)
+{
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.status === 200 || rawFile.status == 0)
+        {
+            var allText = rawFile.responseText;
+        }
+    }
+    rawFile.send(null);
+}
+
+readTextFile("hellopip.log");
+</script>
+

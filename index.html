@@ -24,7 +24,6 @@ function readTextFile(file, cb)
 
 function processFile(file) {
     var locations = JSON.parse(file);
-    locations = locations.filter(function(loc) { return loc["time"] >= startTime; });
     console.log(file);
 }
 

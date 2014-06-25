@@ -25,16 +25,16 @@
     function processFile(file) {
         var locations = JSON.parse(file);
         function map(loc) {
-            if (!loc && !loc["time"]) { return; }
-            var time = loc["time"].toString();
-            loc["time"] = parseInt(time.substring(time.length - 4, time.length));
+            if (!loc && !loc.time) { return; }
+            var time = loc.time.toString();
+            loc.time = parseInt(time.substring(time.length - 4, time.length));
             return loc;
         }
-        function filter(loc) {
-            return loc && loc["time"] && (loc["time"] > startTime);
+        function filt(loc) {
+            return loc && (loc.time > startTime);
         }
         locations = locations.map(map);
-        locations = locations.filter(filter);
+        locations = locations.filter(filt);
         console.log(locations);
     }
 

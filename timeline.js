@@ -21,8 +21,8 @@
     function processFile(file) {
         var locations = JSON.parse(file);
         function map(loc) {
+            if (!loc && !loc["time"]) { return; }
             var time = loc["time"].toString();
-            if (time === undefined) { return; }
             loc["time"] = parseInt(time.substring(time.length - 4, time.length));
         }
         function filter(loc) {

@@ -36,4 +36,6 @@
 
     }
 
+    readTextFile(logFile, processFile);
+
 }());

@@ -34,10 +34,25 @@
         }
         locations = locations.map(map);
         locations = locations.filter(filt);
-        drawTimeline(locations)
+        drawTimeline(turnIntoStartsAndLengths(locations));
+    }
+
+    function turnIntoStartsandLengths(locations) {
+        var startsAndLengths = []
+          , currentIsIndoor = locations[0].isIndoor
+          , startTime = locations[0].time;
+        for (var i = 0; i < locations.length; i++) {
+            if (locations[i].isIndoor !== currentIsIndoor) {
+                startsAndLengths.push({"isIndoor": currentIsIndoor, "startTime": startTime, "length": locations[i].time - startTime});
+                currentIsIndoor = !currentIsIndoor;
+                startTime = locations[i].time;
+            }
+        }
+        return startsAndLengths;
     }
 
     function drawTimeline(locations) {
+        console.log(locations);
         var x
           , y
           , width = 800
@@ -49,7 +64,7 @@
                 .attr("width", width)
                 .attr("height", height);
         x = d3.scale.linear()
-            .domain([0, d3.max(locations, function(loc) { return loc.time; })])
+            .domain([startTime, d3.max(locations, function(loc) { return loc.time; })])
             .range([0, width]);
         y = function(i) { return barHeight * i; }
 

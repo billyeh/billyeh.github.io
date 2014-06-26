@@ -24,7 +24,6 @@
 
     function processFile(file) {
         var locations = JSON.parse(file);
-        file = file.replace("\\u0001", true).replace("\\u0000", false);
         function map(loc) {
             var time = loc.time.toString();
             loc.time = parseInt(time.substring(time.length - 4, time.length));

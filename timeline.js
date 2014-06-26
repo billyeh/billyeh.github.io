@@ -48,6 +48,18 @@
                 .attr("class", "chart")
                 .attr("width", width)
                 .attr("height", height);
+        x = d3.scale.linear()
+            .domain([0, d3.max(locations, function(loc) { return loc.time; })])
+            .range([0, width]);
+        y = function(i) { return barHeight * i; }
+
+        chart.selectAll("rect")
+            .data(locations)
+            .enter().append("rect")
+            .attr("x", 0)
+            .attr("y", function(d, i) { return y(i); })
+            .attr("width", 50)
+            .attr("height", barHeight);
     }
 
     readTextFile(logFile, processFile);

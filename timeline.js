@@ -37,7 +37,7 @@
         drawTimeline(turnIntoStartsAndLengths(locations));
     }
 
-    function turnIntoStartsandLengths(locations) {
+    function turnIntoStartsAndLengths(locations) {
         var startsAndLengths = []
           , currentIsIndoor = locations[0].isIndoor
           , startTime = locations[0].time;

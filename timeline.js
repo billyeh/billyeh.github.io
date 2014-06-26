@@ -25,7 +25,6 @@
     function processFile(file) {
         var locations = JSON.parse(file);
         function map(loc) {
-            if (!loc && !loc.time) { return; }
             var time = loc.time.toString();
             loc.time = parseInt(time.substring(time.length - 4, time.length));
             return loc;
@@ -35,11 +34,20 @@
         }
         locations = locations.map(map);
         locations = locations.filter(filt);
-        console.log(locations);
+        drawTimeline(locations)
     }
 
-    function drawTimeline(timeline) {
-
+    function drawTimeline(locations) {
+        var x
+          , y
+          , width = 800
+          , barHeight = 30
+          , height = 2 * barHeight
+          , chart = d3.select("body")
+                .append("svg")
+                .attr("class", "chart")
+                .attr("width", width)
+                .attr("height", height);
     }
 
     readTextFile(logFile, processFile);

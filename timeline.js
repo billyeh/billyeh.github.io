@@ -24,7 +24,7 @@
 
     function processFile(file) {
         var locations = JSON.parse(file);
-        console.log(file);
+        file = file.replace("\\u0001", true).replace("\\u0000", false);
         function map(loc) {
             var time = loc.time.toString();
             loc.time = parseInt(time.substring(time.length - 4, time.length));
@@ -39,7 +39,6 @@
     }
 
     function turnIntoStartsAndLengths(locations) {
-        console.log(locations);
         var startsAndLengths = []
           , currentIsIndoor = locations[0].isIndoor
           , startTime = locations[0].time;

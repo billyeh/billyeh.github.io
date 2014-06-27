@@ -64,7 +64,7 @@
                 .attr("width", width)
                 .attr("height", height);
         x = d3.scale.linear()
-            .domain([startTime, d3.max(locations, function(loc) { return loc.time; })])
+            .domain([startTime, d3.max(locations, function(loc) { return loc.startTime + loc.length; })])
             .range([0, width]);
         y = function(i) { return barHeight * i; }
 

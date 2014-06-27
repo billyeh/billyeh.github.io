@@ -78,8 +78,6 @@
             .attr("width", function(d, i) { return x(d.length); })
             .attr("height", barHeight)
             .attr("fill", function(d, i) { return d.isIndoor ? "#003366" : "#8d75b0"; });
-        
-        yIndex += barHeight;
     }
 
     readTextFile(logFile, processFile);

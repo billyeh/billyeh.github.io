@@ -4,7 +4,9 @@
     Configuration options
     *********************************************/
     var logFile = "https://dl.dropboxusercontent.com/u/30426053/hellopip.log";
-    var startTime = 3000;
+    var myLog = "https://dl.dropboxusercontent.com/u/30426053/mypip.log";
+    var startTime = 2990;
+    var yIndex = 0;
 
     /*********************************************
     Functionality
@@ -16,7 +18,7 @@
         rawFile.onreadystatechange = function () {
             if (rawFile.status === 200 || rawFile.status === 0) {
                 var allText = rawFile.responseText;
-                cb(allText);
+                return cb(allText);
             }
         }
         rawFile.send(null);
@@ -72,12 +74,15 @@
             .data(locations)
             .enter().append("rect")
             .attr("x", function(d, i) { return x(d.startTime - startTime); })
-            .attr("y", 0)
+            .attr("y", yIndex)
             .attr("width", function(d, i) { return x(d.length); })
             .attr("height", barHeight)
             .attr("fill", function(d, i) { return d.isIndoor ? "#003366" : "#8d75b0"; });
+        
+        yIndex += barHeight;
     }
 
     readTextFile(logFile, processFile);
-
+    var processed = readTextFile(myLog, turnIntoStartsAndLengths);
+    console.log(processed);
 }());

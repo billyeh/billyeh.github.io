@@ -13,12 +13,7 @@
     *********************************************/
     var width = 800
       , barHeight = 30
-      , height = 2 * barHeight 
-      , chart = d3.select("body")
-                .append("svg")
-                .attr("class", "chart")
-                .attr("width", width)
-                .attr("height", height);
+      , height = barHeight;
 
     function readTextFile(file, cb) {
         var rawFile = new XMLHttpRequest();
@@ -63,6 +58,11 @@
 
     function drawTimeline(locations) {
         console.log(locations);
+        var chart = d3.select("body")
+                .append("svg")
+                .attr("class", "chart")
+                .attr("width", width)
+                .attr("height", height);
         var x
           , y;
         x = d3.scale.linear()

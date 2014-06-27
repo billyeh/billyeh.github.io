@@ -11,6 +11,14 @@
     /*********************************************
     Functionality
     *********************************************/
+    var width = 800
+      , barHeight = 30
+      , height = 2 * barHeightchart 
+      , chart = d3.select("body")
+                .append("svg")
+                .attr("class", "chart")
+                .attr("width", width)
+                .attr("height", height);
 
     function readTextFile(file, cb) {
         var rawFile = new XMLHttpRequest();
@@ -56,15 +64,7 @@
     function drawTimeline(locations) {
         console.log(locations);
         var x
-          , y
-          , width = 800
-          , barHeight = 30
-          , height = 2 * barHeight
-          , chart = d3.select("body")
-                .append("svg")
-                .attr("class", "chart")
-                .attr("width", width)
-                .attr("height", height);
+          , y;
         x = d3.scale.linear()
             .domain([0, d3.max(locations, function(loc) { return loc.startTime + loc.length - startTime; })])
             .range([0, width]);

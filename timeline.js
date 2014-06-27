@@ -13,7 +13,7 @@
     *********************************************/
     var width = 800
       , barHeight = 30
-      , height = 2 * barHeightchart 
+      , height = 2 * barHeight 
       , chart = d3.select("body")
                 .append("svg")
                 .attr("class", "chart")

@@ -74,7 +74,8 @@
             .attr("x", function(d, i) { return x(d.startTime - startTime); })
             .attr("y", 0)
             .attr("width", function(d, i) { return x(d.length); })
-            .attr("height", barHeight);
+            .attr("height", barHeight)
+            .attr("fill", function(d, i) { return d.isIndoor ? "#003366" : "#8d75b0"; });
     }
 
     readTextFile(logFile, processFile);

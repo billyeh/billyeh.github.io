@@ -44,7 +44,7 @@
           , currentIsIndoor = locations[0].isIndoor
           , startTime = locations[0].time;
         for (var i = 0; i < locations.length; i++) {
-            if (locations[i].isIndoor !== currentIsIndoor) {
+            if (locations[i].isIndoor !== currentIsIndoor || i === locations.length - 1) {
                 startsAndLengths.push({"isIndoor": currentIsIndoor, "startTime": startTime, "length": locations[i].time - startTime});
                 currentIsIndoor = !currentIsIndoor;
                 startTime = locations[i].time;
@@ -83,6 +83,5 @@
     }
 
     readTextFile(logFile, processFile);
-    var processed = readTextFile(myLog, turnIntoStartsAndLengths);
-    console.log(processed);
+    readTextFile(myLog, processFile);
 }());

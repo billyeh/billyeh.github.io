@@ -71,7 +71,7 @@
         chart.selectAll("rect")
             .data(locations)
             .enter().append("rect")
-            .attr("x", function(d, i) { return x(d.startTime); })
+            .attr("x", function(d, i) { return x(d.startTime - startTime); })
             .attr("y", 0)
             .attr("width", function(d, i) { return x(d.length); })
             .attr("height", barHeight);

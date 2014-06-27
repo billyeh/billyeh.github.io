@@ -38,7 +38,6 @@
     }
 
     function turnIntoStartsAndLengths(locations) {
-        console.log(locations);
         var startsAndLengths = []
           , currentIsIndoor = locations[0].isIndoor
           , startTime = locations[0].time;
@@ -72,9 +71,9 @@
         chart.selectAll("rect")
             .data(locations)
             .enter().append("rect")
-            .attr("x", 0)
-            .attr("y", function(d, i) { return y(i); })
-            .attr("width", 50)
+            .attr("x", function(d, i) { return x(d.startTime); })
+            .attr("y", 0)
+            .attr("width", function(d, i) { return x(d.length); })
             .attr("height", barHeight);
     }
 

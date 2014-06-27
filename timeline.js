@@ -38,6 +38,7 @@
     }
 
     function turnIntoStartsAndLengths(locations) {
+        console.log(locations);
         var startsAndLengths = []
           , currentIsIndoor = locations[0].isIndoor
           , startTime = locations[0].time;

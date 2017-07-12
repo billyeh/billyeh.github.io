@@ -1,0 +1,98 @@
+<html>
+<head>
+<style>
+  @media print {
+    #links {
+      display: none !important;
+    }
+  }
+
+  #main, #links {
+    display: flex;
+  }
+  #links {
+    position: sticky;
+    top: 0px;
+    background-color: #ff94aa;
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #links a {
+    color: white;
+    padding: 0px 5px 0px 5px;
+  }
+  #main {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 500px;
+    line-height: 1.5;
+    text-align: justify;
+  }
+  body {
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+  }
+  .outline {
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+<script>let book</script>
+<script src="data/flatbible/matt.js"></script>
+<script>
+const NT_BOOKS = ["Matt","Mark","Luke","John","Acts","Rom","1Cor","2Cor","Gal","Eph","Phil","Col","1Thess","2Thess","1Tim","2Tim","Titus","Phlm","Heb","Jas","1Pet","2Pet","1John","2John","3John","Jude","Rev"]
+
+let removeElements = (query) => {
+  var paras = document.querySelectorAll(query)
+  while(paras[0]) {
+    if (!(paras[0].parentNode)) {
+      break
+    }
+    paras[0].parentNode.removeChild(paras[0])
+  }
+}
+
+window.onload = () => {
+  var main = document.getElementById('main')
+  var links = document.getElementById('links')
+  for (let b of NT_BOOKS) {
+    let link = document.createElement("a")
+    link.textContent = b
+    link.href = "data/flatbible/" + b.toLowerCase() + ".js"
+    link.onclick = (e) => {
+      e.preventDefault()
+      function reqListener () {
+        eval(this.responseText)
+        main.innerHTML = ''
+        let heading = document.createElement('h2')
+        heading.textContent = book.name
+        main.appendChild(heading)
+        for (let content of book.contents) {
+          let para = document.createElement('p')
+          para.textContent = content.text
+          para.classList.add(content.type)
+          main.appendChild(para)
+        }
+      }
+      
+      var oReq = new XMLHttpRequest()
+      oReq.addEventListener("load", reqListener)
+      oReq.open("GET", e.target.href)
+      oReq.send()
+    }
+    links.appendChild(link)
+  }
+  links.firstChild.click()
+}
+</script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="links"></div>
+    <div id="main"></div>
+  </div>
+</body>
+</html>

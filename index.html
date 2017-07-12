@@ -1,46 +1,118 @@
 <html>
+<head>
+  <style>
+    :root {
+      --main-font: white;
+      --main-color: #DB0A5B;
+      --second-color: #FFEA19;
+      --third-color: #14ABCC;
+      --fifth-color: #0994B2;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      font-family: Helvetica, sans-serif;
+    }
+
+    h1 {
+      background-color: var(--main-color);
+      color: var(--main-font);
+      margin: 0;
+      line-height: 100vh;
+    }
+
+    img {
+      padding: 0 2em 2em 2em;
+      width: 80vw;
+    }
+
+    .caption {
+      font-weight: bold;
+    }
+
+    #work, #music {
+      background-color: var(--second-color);
+    }
+    #coursework {
+      background-color: var(--fifth-color);
+    }
+    #research, #teaching {
+      background-color: var(--third-color);
+    }
+    #projects {
+      background-color: var(--main-color);
+    }
+    #footer {
+      background-color: var(--main-color);
+      margin: 0;
+      padding: 1em;
+    }
+  </style>
+</head>
 <body>
-    <h2>Projects</h2>
-    <ul>
-        <li>Hymnal Android app</li>
-        <li>RedeemTheTime, Chrome extension</li>
-        <li>House accont, Django application</li>
-        <li>termchat, terminal video chatting app on Node.js</li>
-    </ul>
+  <h1>
+    Bill Yeh
+    <a href="https://github.com/billyeh">Github</a>
+    <a href="https://www.linkedin.com/in/bill-yeh-84156662/">LinkedIn</a>
+    <a href="https://stackoverflow.com/users/2044733/bbill">StackOverflow</a>
+ </h1>
 
+  <div id="work">
     <h2>Work Experience</h2>
-    <ul>
-        <li>Bloomberg summer 2015 internship</li>
-        <li>Qualcomm summer 2014 internship</li>
-        <li>Technical co-founder, Clarity, fall 2013</li>
-        <li>McKesson RelayHealth summer 2013 internship</li>
-    </ul>
+    <p>Bloomberg summer 2015 internship</p>
+    <p>Qualcomm summer 2014 internship</p>
+    <p>Technical co-founder, Clarity, fall 2013</p>
+    <p>McKesson RelayHealth summer 2013 internship</p>
+  </div>
 
+  <div id="teaching">
     <h2>Teaching</h2>
-    <ul>
-        <li>CS 161 spring 2015</li>
-        <li>CS 161 fall 2015</li>
-    </ul>
+    <p>CS 161 spring 2015</p>
+    <p>CS 161 fall 2015</p>
+    <p>CS 161 spring 2016</p>
+  </div>
 
+  <div id="coursework">
     <h2>Coursework</h2>
-    <ul>
-        <li>CS 161</li>
-        <li>CS 170</li>
-        <li>CS 188</li>
-        <li>CS 162</li>
-        <li>CS 189</li>
-        <li>CS 186</li>
-        <li>CS 168</li>
-        <li>CS 160</li>
-        <li>CS 194</li>
-        <li>EE 120</li>
-        <li>EE 126</li>
-    </ul>
+    <p>CS 160</p>
+    <p>CS 161</p>
+    <p>CS 162</p>
+    <p>CS 168</p>
+    <p>CS 170</p>
+    <p>CS 188</p>
+    <p>CS 189</p>
+    <p>CS 186</p>
+    <p>CS 194</p>
+    <p>EE 120</p>
+    <p>EE 126</p>
+  </div>
 
+  <div id="projects">
+    <h2>Projects</h2>
+    <p><a href="flatbible.html">Flat Bible</a></p>
+  </div>
+  <div id="research">
     <h2>Research</h2>
-    <ul>
-        <li>Patent disambiguation at the UC Berkeley Fung Institute, Spring
-        2013 to fall 2015</li>
-    </ul>
+    <p>Patent disambiguation at the UC Berkeley Fung Institute, Spring
+    2013 to fall 2015</p>
+    <p class="caption">Map of Patents Granted in 2010</p>
+    <img src="images/patents_2010.png" />
+  </div>
+
+  <div id="music">
+    <h2>Music</h2>
+    <p><a href="https://soundcloud.com/caleb-j-choy/thy-transforming-love-medley">A Medley</a></p>
+    <p><a href="https://soundcloud.com/berkeleysaints/sets/new-things">A CD</a></p>
+  </div>
+
+  <p id="footer">Made with &#10084; in Vim with help from
+    <a href="https://developer.mozilla.org/en-US/">MDN</a>
+    <a href="http://www.flatuicolorpicker.com/">Flat UI Color Picker</a>
+    <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">A Complete Guide to Flexbox</a>
+    <a href="https://color.adobe.com/create/color-wheel/?base=2&rule=Triad&selected=0&name=My%20Color%20Theme&mode=rgb&rgbvalues=0.8588235294117647,0.0392156862745098,0.3568627450980392,1,0.9175798734373984,0.09999999999999998,1,0,0.3875598086121954,0.07999999999999999,0.6689700327371612,0.8,0.03500000000000003,0.5789792663475168,0.7&swatchOrder=0,1,2,3,4">Adobe Color CC</a>
+  </p>
 </body>
 </html>

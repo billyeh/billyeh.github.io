@@ -11,7 +11,7 @@ url.searchParams.set("Out", "json");
 // Example input: https://api.lsm.org/recver.php?String=%27Psa.%2042:1-2;%2034:8&Out=json
 let AddVerses = (data) => {
   const versesDiv = document.getElementById("verse_box");
-  if (data.inputstring) {
+  if (data.inputstring !== "null") {
     versesDiv.value = data.inputstring;
     data.verses.forEach(AddVerse);
   }

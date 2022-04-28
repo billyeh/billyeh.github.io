@@ -13,8 +13,8 @@ let AddVerses = (data) => {
   const versesDiv = document.getElementById("verse_box");
   if (data.inputstring) {
     versesDiv.value = data.inputstring;
+    data.verses.forEach(AddVerse);
   }
-  data.verses.forEach(AddVerse);
 };
 let AddVerse = (verse) => {
   let verseP = document.createElement("p");

@@ -1,6 +1,92 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body {
+        background-color: #f5f5f3;
+      }
+      .section {
+        padding: 4rem 0 2rem;
+      }
+
+      .hero {
+        padding: 16rem 0 8rem;
+        background-size: cover;
+      }
+
+      .navbar + .docs-section {
+        border-top-width: 0; }
+      .navbar,
+      .navbar-spacer {
+        display: block;
+        width: 100%;
+        height: 6.5rem;
+        background: #fff;
+        z-index: 99;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee; }
+      .navbar-spacer {
+        display: none; }
+      .navbar > .container {
+        width: 100%; }
+      .navbar-list {
+        list-style: none;
+        margin-bottom: 0; }
+      .navbar-item {
+        position: relative;
+        float: left;
+        margin-bottom: 0; }
+      .navbar-link {
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .2rem;
+        margin-right: 35px;
+        text-decoration: none;
+        line-height: 6.5rem;
+        color: #5d7251; }
+      .navbar-link.active {
+        color: #edaf2d; }
+      .navbar-link:hover {
+        color: #edaf2d;
+      }
+      .has-docked-nav .navbar {
+        position: fixed;
+        top: 0;
+        left: 0; }
+      .has-docked-nav .navbar-spacer {
+        display: block; }
+      /* Re-overriding the width 100% declaration to match size of % based container */
+      .has-docked-nav .navbar > .container {
+        width: 80%; }
+
+      .welcome {
+        color: #edaf2d;
+      }
+      #welcome {
+        font-size: 10rem;
+      }
+      .reception {
+        font-size: 7rem;
+      }
+
+      .program {
+        color: #2D3827;
+        font-size: 2rem;
+      }
+      .table {
+        color: #2D3827;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      div.tables > p {
+        margin-bottom: 0;
+      }
+      .table-row {
+        padding-bottom: 2rem;
+      }
+    </style>
   </head>
   
   <body>
@@ -8,9 +94,129 @@
       <div class="container">
         <div class="row">
           <div class="twelve columns">
-            <h1>Welcome to our reception!</h1>
+            <h1 class="welcome" id="welcome">WELCOME</h1>
+            <h1 class="welcome reception">to our reception!</h1>
           </div>
         </div>
       </div>
+    </div>
+
+    <nav class="navbar">
+      <div class="container">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="#welcome">Welcome</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="#program">Program</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="#seating">Seating Chart</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="section program" id="program">
+      <div class="container">
+        <div class="row">
+          <div class="twelve columns">
+            <h2 class="program">Introduction</h2>
+            <h2 class="program">Hymn 1</h2>
+            <h2 class="program">Testimonies</h2>
+            <h2 class="program">Hymn 2</h2>
+            <h2 class="program">A Short Word</h2>
+            <h2 class="program">Prayer</h2>
+            <h2 class="program">Dinner & Photos</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section seating" id="seating">
+      <div class="container">
+        <div class="row table-row">
+          <div class="tables three columns">
+            <h3 class="table">TABLE 1</h3>
+            <p>Bill</p><p>Connie</p><p>James</p><p>Shirlyn</p><p>Cassie</p><p>Grace</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 2</h3>
+            <p>Rebecca C</p><p>Sophie</p><p>Tanya</p><p>Jiamin</p><p>Irene</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 3</h3>
+            <p>Liman</p><p>Lovejoy</p><p>Micah</p><p>Alan</p><p>Julie</p><p>Chloe</p><p>Hudson</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 4</h3>
+            <p>Paul C</p><p>Katherine</p><p>Clark</p><p>Kayla</p><p>Natalie</p><p>Jonathan</p><p>Renik</p>
+          </div>
+        </div>
+        <div class="row table-row">
+          <div class="tables three columns">
+            <h3 class="table">TABLE 5</h3>
+            <p>Carly</p><p>Madhu</p><p>Jian</p><p>Mike W</p><p>Wenyang</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 6</h3>
+            <p>Brian</p><p>Jenny C</p><p>Aaron Choy</p><p>Abraham</p><p>Ethan</p><p>Wenqian</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 7</h3>
+            <p>Shaun</p><p>Helena</p><p>Andrew L</p><p>Tim L</p><p>Enoch</p><p>Raymond</p><p>Adrian</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 8</h3>
+            <p>Jeffrey</p><p>Peace</p><p>Titus C</p><p>Esther</p><p>Weiran</p><p>Jenny J</p>
+          </div>
+        </div>
+        <div class="row table-row">
+          <div class="tables three columns">
+            <h3 class="table">TABLE 9</h3>
+            <p>Martin</p><p>Jean</p><p>Abigail</p><p>Cassia</p><p>Joe</p><p>Angela L</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 10</h3>
+            <p>Kelvin</p><p>Jing</p><p>Bryant V</p><p>Linda</p><p>Jonah</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 11</h3>
+            <p>Iris</p><p>Mimi</p><p>John</p><p>Angela K</p><p>Michael Y</p><p>Harrison</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 12</h3>
+            <p>Jun</p><p>Nanping</p><p>Junjia</p><p>Betty</p><p>Tony</p><p>Sherry</p><p>Emily D</p>
+          </div>
+        </div>
+        <div class="row table-row">
+          <div class="tables three columns">
+            <h3 class="table">TABLE 13</h3>
+            <p>David</p><p>Xinyu</p><p>Johnny</p><p>Joyce</p><p>Ming</p><p>Puquan</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 14</h3>
+            <p>Isaballa</p><p>Sarah</p><p>Gregory</p><p>Paul N</p><p>Ivy</p><p>Tim H</p><p>Bryant S</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 15</h3>
+            <p>Anatol</p><p>Ling</p><p>Anastasia</p><p>Karis</p><p>Titus J</p><p>Havanah</p><p>Aaron Cao</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 16</h3>
+            <p>Sunil</p><p>Josten</p><p>Josephine</p><p>Chenchen</p><p>Muxi</p><p>Eric</p><p>Emily K</p>
+          </div>
+        </div>
+        <div class="row table-row">
+          <div class="tables three columns">
+            <h3 class="table">TABLE 17</h3>
+            <p>Billy</p><p>Danny</p><p>Jon C</p><p>Symphony</p><p>Andrew S</p><p>Wesley</p><p>Jennifer</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 18</h3>
+            <p>Larry</p><p>Sophia</p><p>Christopher</p><p>Turner</p><p>Ezra</p><p>Yung-En</p><p>Rebecca P</p>
+          </div>
+          <div class="tables three columns">
+            <h3 class="table">TABLE 19</h3>
+            <p>Samuel</p><p>Will</p><p>Nich</p><p>Jerry</p><p>Tony</p><p>Peter</p><p>Steven</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

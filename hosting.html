@@ -66,11 +66,11 @@
       <ol>
         <li>Go to <a href="https://www.duckdns.org" target="_blank" rel="noopener noreferrer">https://www.duckdns.org</a></li>
         <li>Sign in with GitHub, Google, or another provider.</li>
-        <li>Under <strong>domains</strong>, create a name — e.g. <code>biblereading</code>.</li>
+        <li>Under <strong>domains</strong>, create a name — e.g. <code>myproject</code>.</li>
         <li>Copy your <strong>token</strong> (you’ll need it for DNS-based SSL).</li>
         <li>Note your chosen domain:</li>
       </ol>
-      <pre><code>biblereading.duckdns.org</code></pre>
+      <pre><code>myproject.duckdns.org</code></pre>
     </section>
 
     <hr>
@@ -86,7 +86,7 @@
     
       <p>Run this once to register your current IP:</p>
     
-      <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=biblereading&amp;token=&lt;your-token&gt;"</code></pre>
+      <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=myproject&amp;token=&lt;your-token&gt;"</code></pre>
     
       <p>You should see:</p>
     
@@ -94,7 +94,7 @@
     
       <p>To confirm it worked:</p>
     
-      <pre><code class="language-bash">nslookup biblereading.duckdns.org 8.8.8.8</code></pre>
+      <pre><code class="language-bash">nslookup myproject.duckdns.org 8.8.8.8</code></pre>
     
       <p>
         You should see your <strong>public IP</strong> 
@@ -154,7 +154,7 @@ sudo chmod +x /usr/local/bin/caddy</code></pre>
 
       <p>Create <code>Caddyfile</code> in the same directory:</p>
 
-      <pre><code>biblereading.duckdns.org {
+      <pre><code>myproject.duckdns.org {
     reverse_proxy localhost:8090
 
     tls {
@@ -165,7 +165,7 @@ sudo chmod +x /usr/local/bin/caddy</code></pre>
       <p>This tells Caddy to:</p>
 
       <ul>
-        <li>Listen on HTTPS for <code>biblereading.duckdns.org</code></li>
+        <li>Listen on HTTPS for <code>myproject.duckdns.org</code></li>
         <li>Proxy requests to your local app on port 8090</li>
         <li>Obtain and renew certificates automatically via DuckDNS</li>
       </ul>
@@ -219,7 +219,7 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
       <h2>8️⃣ Verify It’s Live 🌍</h2>
 
       <p>Open your browser to:</p>
-      <pre><code>https://biblereading.duckdns.org</code></pre>
+      <pre><code>https://myproject.duckdns.org</code></pre>
       <p>If everything’s configured, you’ll see your PocketBase UI.</p>
     </section>
 
@@ -272,7 +272,7 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
 
       <details>
         <summary>Domain resolves but won’t connect</summary>
-        <pre><code class="language-bash">ping biblereading.duckdns.org</code></pre>
+        <pre><code class="language-bash">ping myproject.duckdns.org</code></pre>
         <ul>
           <li>Ensure your local firewall allows incoming on 443.</li>
           <li>Confirm Caddy is still running.</li>
@@ -283,7 +283,7 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
       <details>
         <summary>Caddyfile parse error: “wrong argument count or unexpected line ending after 'h1'”</summary>
         <p>Make sure your Caddyfile doesn’t contain any trailing spaces or comments in the <code>tls</code> section. It should look exactly like:</p>
-        <pre><code>biblereading.duckdns.org {
+        <pre><code>myproject.duckdns.org {
     reverse_proxy localhost:8090
     tls {
         dns duckdns &lt;your-token&gt;
@@ -307,7 +307,7 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
 
       <ol>
         <li>Update your IP on DuckDNS:
-          <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=biblereading&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
+          <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=myproject&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
         </li>
         <li>Restart Caddy:
           <pre><code class="language-bash">sudo caddy run --config ./Caddyfile --adapter caddyfile</code></pre>

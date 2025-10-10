@@ -77,24 +77,32 @@
 
     <section id="update-ip">
       <h2>2️⃣ Point DuckDNS to Your Current IP</h2>
-      <p>Run this command in Terminal to manually update your IP:</p>
-
-      <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=biblereading&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
-
-      <p>You should get a response like:</p>
+    
+      <p>
+        Normally, DuckDNS automatically sets your domain to the 
+        <strong>public IP</strong> of the machine making the update request — 
+        no need to specify it manually.
+      </p>
+    
+      <p>Run this once to register your current IP:</p>
+    
+      <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=biblereading&amp;token=&lt;your-token&gt;"</code></pre>
+    
+      <p>You should see:</p>
+    
       <pre><code>OK</code></pre>
-
+    
       <p>To confirm it worked:</p>
+    
       <pre><code class="language-bash">nslookup biblereading.duckdns.org 8.8.8.8</code></pre>
-
-      <p>You should see your <strong>public IP</strong>.</p>
-
-      <blockquote>
-        💡 You can check your current public IP at 
-        <a href="https://whatismyipaddress.com/" target="_blank" rel="noopener noreferrer">
-          https://whatismyipaddress.com/
-        </a>.
-      </blockquote>
+    
+      <p>
+        You should see your <strong>public IP</strong> 
+        (check it with 
+        <a href="https://whatismyipaddress.com" target="_blank" rel="noopener noreferrer">
+          whatismyipaddress.com
+        </a>).
+      </p>
     </section>
 
     <hr>

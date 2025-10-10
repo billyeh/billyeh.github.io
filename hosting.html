@@ -313,10 +313,6 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
           If you want to update DuckDNS periodically with your IP address, run <code>crontab -e</code>
           and add <code>*/5 * * * * curl -s "https://www.duckdns.org/update?domains=myproject&token=<token>&ip="</code>
         </li>
-        </li>
-        <li>Update your IP on DuckDNS:
-          <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=myproject&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
-        </li>
         <li>Restart Caddy:
           <pre><code class="language-bash">sudo caddy run --config ./Caddyfile --adapter caddyfile</code></pre>
         </li>

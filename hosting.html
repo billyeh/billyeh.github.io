@@ -113,7 +113,9 @@
 
       <pre><code class="language-bash">curl -L https://github.com/pocketbase/pocketbase/releases/latest/download/pocketbase_darwin_arm64.zip -o pb.zip
 unzip pb.zip
-./pocketbase serve</code></pre>
+./pocketbase serve --http=0.0.0.0:8090</code></pre>
+
+      <p>💡 Using 0.0.0.0 instead of the default localhost (127.0.0.1) allows external users to reach the server.</p>
 
       <p>PocketBase runs on <code>http://127.0.0.1:8090</code> by default.</p>
     </section>

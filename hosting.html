@@ -313,13 +313,90 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
           If you want to update DuckDNS periodically with your IP address, run <code>crontab -e</code>
           and add <code>*/5 * * * * curl -s "https://www.duckdns.org/update?domains=myproject&token=<token>&ip="</code>
         </li>
-        <li>Restart Caddy:
-          <pre><code class="language-bash">sudo caddy run --config ./Caddyfile --adapter caddyfile</code></pre>
-        </li>
-        <li>Visit your domain again.</li>
-      </ol>
+        <li>If you want to start pocketbase when your computer boots, add this file: 
+          <code>~/Library/LaunchAgents/com.user.pocketbase.plist</code>
+          And its contents would be:
+          <pre><code class="language-bash"><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.user.pocketbase</string>
 
-      <p>For persistent setup, consider using <strong>Launchd</strong> (macOS) or <strong>systemd</strong> (Linux) to auto-start Caddy on boot.</p>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/local/bin/pocketbase</string>
+      <string>serve</string>
+      <string>--http=0.0.0.0:8090</string>
+      <string>--dir=/Users/billyeh/workspace/pb_data</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/billyeh/workspace/pocketbase</string>
+
+    <key>StandardOutPath</key>
+    <string>/Users/billyeh/logs/pocketbase.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/billyeh/logs/pocketbase.err.log</string>
+  </dict>
+</plist>
+          </code></pre>
+      <p>You can customize the paths as desired.</p>
+        </li>
+        <li>And for starting Caddy when your computer boots, you'll need to create the file <code>vim /Library/LaunchDaemons/com.user.caddy.plist</code>
+          using your root user. It'll contain: 
+          <pre><code><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.caddy</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/caddy</string>
+        <string>run</string>
+        <string>--config</string>
+        <string>/Users/billyeh/workspace/Caddyfile</string>
+        <string>--adapter</string>
+        <string>caddyfile</string>
+        <string>--environ</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>CADDY_HOME</key>
+        <string>/usr/local/caddy</string>
+        <key>HOME</key>
+        <string>/usr/local/caddy</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardErrorPath</key>
+    <string>/var/log/caddy.err.log</string>
+    <key>StandardOutPath</key>
+    <string>/var/log/caddy.out.log</string>
+</dict>
+</plist>
+          </code></pre>
+
+        <p>You can again customize the home directories, but make sure they're defined and the root user can access them.</p>
+        </li>
+      </ol>
     </section>
 
     <hr>

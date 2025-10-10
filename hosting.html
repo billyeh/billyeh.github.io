@@ -273,22 +273,32 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
         </ul>
       </details>
 
-      <details>
-        <summary>Caddyfile parse error: “wrong argument count or unexpected line ending after 'h1'”</summary>
-        <p>Make sure your Caddyfile doesn’t contain any trailing spaces or comments in the <code>tls</code> section. It should look exactly like:</p>
-        <pre><code>myproject.duckdns.org {
-    reverse_proxy localhost:8090
-    tls {
-        dns duckdns &lt;your-token&gt;
+      <section id="troubleshooting-quic">
+  <details>
+    <summary><code>ERR_QUIC_PROTOCOL_ERROR</code> or connection refused after HTTPS works</summary>
+    <p>
+      If your domain loads over HTTPS but shows 
+      <strong>“ERR_QUIC_PROTOCOL_ERROR”</strong> or refuses to connect 
+      (especially on Chrome), it may be caused by <strong>HTTP/3 (QUIC)</strong> issues.
+    </p>
+
+    <p>
+      Caddy enables HTTP/3 automatically when using HTTPS, but some routers or browsers don’t fully support QUIC. 
+      You can safely disable it by restricting your server to HTTP/1.1 and HTTP/2:
+    </p>
+
+    <pre><code class="language-caddyfile">{
+    servers {
+        protocols h1 h2  # disable HTTP/3 (QUIC)
     }
 }</code></pre>
-      </details>
 
-      <details>
-        <summary>ERR_QUIC_PROTOCOL_ERROR in Chrome</summary>
-        <p>That’s an HTTP/3 issue, usually harmless. Try a hard refresh or disable QUIC in Chrome:</p>
-        <pre><code>chrome://flags/#enable-quic → Disabled</code></pre>
-      </details>
+    <p>
+      This doesn’t affect TLS, and your site will still work perfectly fine over HTTPS with modern browsers.
+    </p>
+  </details>
+</section>
+
     </section>
 
     <hr>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Host Your Own PocketBase (or Any Local Server) Online for Free with DuckDNS and Caddy</title>
+  <meta name="description" content="Guide to hosting a local server like PocketBase online securely using DuckDNS and Caddy, with automatic HTTPS and zero cost.">
+  <style>
+    html {
+      color-scheme: light dark;
+    }
+    
+    body {
+      font-family: system-ui;
+      font-size: 1.25rem;
+      line-height: 1.5;
+    }
+    
+    img,
+    svg,
+    video {
+      max-width: 100%;
+      display: block;
+    }
+    
+    main {
+      max-width: min(70ch, 100% - 4rem);
+      margin-inline: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <header>
+      <h1>Host Your Own PocketBase (or Any Local Server) Online for Free with DuckDNS and Caddy</h1>
+      <p>
+        Want to make your local server (like 
+        <a href="https://pocketbase.io/" target="_blank" rel="noopener noreferrer">PocketBase</a>)
+        accessible on the internet—securely, with HTTPS—without paying for a domain or hosting?
+        This guide shows you how to do exactly that using <strong>DuckDNS</strong> and <strong>Caddy</strong> on macOS
+        (though it works similarly on Linux and Windows).
+      </p>
+    </header>
+
+    <hr>
+
+    <section id="overview">
+      <h2>🧩 Overview</h2>
+      <p>We’ll set up:</p>
+      <ul>
+        <li><strong>DuckDNS</strong> – Free dynamic DNS service (maps a free subdomain to your public IP)</li>
+        <li><strong>Caddy</strong> – Lightweight web server and reverse proxy with automatic HTTPS</li>
+        <li><strong>PocketBase</strong> – Example app running locally on port <code>8090</code></li>
+      </ul>
+
+      <p>Once done, your site will be available at:</p>
+
+      <pre><code>https://&lt;your-domain&gt;.duckdns.org/</code></pre>
+    </section>
+
+    <hr>
+
+    <section id="duckdns-subdomain">
+      <h2>1️⃣ Create a DuckDNS Subdomain</h2>
+      <ol>
+        <li>Go to <a href="https://www.duckdns.org" target="_blank" rel="noopener noreferrer">https://www.duckdns.org</a></li>
+        <li>Sign in with GitHub, Google, or another provider.</li>
+        <li>Under <strong>domains</strong>, create a name — e.g. <code>biblereading</code>.</li>
+        <li>Copy your <strong>token</strong> (you’ll need it for DNS-based SSL).</li>
+        <li>Note your chosen domain:</li>
+      </ol>
+      <pre><code>biblereading.duckdns.org</code></pre>
+    </section>
+
+    <hr>
+
+    <section id="update-ip">
+      <h2>2️⃣ Point DuckDNS to Your Current IP</h2>
+      <p>Run this command in Terminal to manually update your IP:</p>
+
+      <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=biblereading&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
+
+      <p>You should get a response like:</p>
+      <pre><code>OK</code></pre>
+
+      <p>To confirm it worked:</p>
+      <pre><code class="language-bash">nslookup biblereading.duckdns.org 8.8.8.8</code></pre>
+
+      <p>You should see your <strong>public IP</strong>.</p>
+
+      <blockquote>
+        💡 You can check your current public IP at 
+        <a href="https://whatismyipaddress.com/" target="_blank" rel="noopener noreferrer">
+          https://whatismyipaddress.com/
+        </a>.
+      </blockquote>
+    </section>
+
+    <hr>
+
+    <section id="install-pocketbase">
+      <h2>3️⃣ Install PocketBase (example app)</h2>
+      <p>Download and unpack PocketBase (or your own binary):</p>
+
+      <pre><code class="language-bash">curl -L https://github.com/pocketbase/pocketbase/releases/latest/download/pocketbase_darwin_arm64.zip -o pb.zip
+unzip pb.zip
+./pocketbase serve</code></pre>
+
+      <p>PocketBase runs on <code>http://127.0.0.1:8090</code> by default.</p>
+    </section>
+
+    <hr>
+
+    <section id="install-caddy">
+      <h2>4️⃣ Install Caddy with DuckDNS Support</h2>
+
+      <h3>a. Download Caddy with DuckDNS DNS plugin</h3>
+
+      <p>
+        Visit the <a href="https://caddyserver.com/download" target="_blank" rel="noopener noreferrer">Caddy Download Page</a>
+        and under “Build Custom”, select:
+      </p>
+
+      <ul>
+        <li><strong>Plugin:</strong> <code>tls.dns.duckdns</code></li>
+        <li><strong>Platform:</strong> <code>macOS arm64</code> (for M1/M2 Macs)</li>
+      </ul>
+
+      <p>Then unzip and move the binary:</p>
+
+      <pre><code class="language-bash">sudo mv caddy_darwin_arm64_custom /usr/local/bin/caddy
+sudo chmod +x /usr/local/bin/caddy</code></pre>
+
+      <p>Confirm it runs:</p>
+
+      <pre><code class="language-bash">caddy version</code></pre>
+    </section>
+
+    <hr>
+
+    <section id="caddyfile">
+      <h2>5️⃣ Configure Caddyfile</h2>
+
+      <p>Create <code>Caddyfile</code> in the same directory:</p>
+
+      <pre><code>biblereading.duckdns.org {
+    reverse_proxy localhost:8090
+
+    tls {
+        dns duckdns &lt;your-duckdns-token&gt;
+    }
+}</code></pre>
+
+      <p>This tells Caddy to:</p>
+
+      <ul>
+        <li>Listen on HTTPS for <code>biblereading.duckdns.org</code></li>
+        <li>Proxy requests to your local app on port 8090</li>
+        <li>Obtain and renew certificates automatically via DuckDNS</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <section id="run-caddy">
+      <h2>6️⃣ Run Caddy</h2>
+      <p>Run:</p>
+      <pre><code class="language-bash">sudo caddy run --config ./Caddyfile --adapter caddyfile</code></pre>
+
+      <p>You should see output similar to:</p>
+
+      <pre><code>INFO    serving initial configuration
+INFO    http.enabling automatic TLS certificate management
+INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</code></pre>
+
+      <p>✅ This means Caddy is running and managing HTTPS certificates.</p>
+    </section>
+
+    <hr>
+
+    <section id="router-port-forwarding">
+      <h2>7️⃣ Configure Router Port Forwarding</h2>
+
+      <p>You need to expose ports <strong>443 (HTTPS)</strong> and optionally <strong>80 (HTTP)</strong> to your Mac’s internal IP.</p>
+
+      <h3>For Google WiFi / Nest routers</h3>
+
+      <ol>
+        <li>Open the <strong>Google Home app</strong></li>
+        <li>Tap <strong>Wi-Fi → Settings → Advanced Networking → Port Management</strong></li>
+        <li>Add a new rule:</li>
+      </ol>
+
+      <ul>
+        <li><strong>Internal IP:</strong> your Mac’s local IP (e.g. <code>192.168.86.42</code>)</li>
+        <li><strong>External port:</strong> <code>443</code></li>
+        <li><strong>Internal port:</strong> <code>443</code></li>
+        <li><strong>Protocol:</strong> TCP</li>
+        <li><strong>Device:</strong> select your Mac</li>
+      </ul>
+
+      <p>If port 80 gives you “failed to add new rule”, skip it — HTTPS (443) is enough.</p>
+    </section>
+
+    <hr>
+
+    <section id="verify">
+      <h2>8️⃣ Verify It’s Live 🌍</h2>
+
+      <p>Open your browser to:</p>
+      <pre><code>https://biblereading.duckdns.org</code></pre>
+      <p>If everything’s configured, you’ll see your PocketBase UI.</p>
+    </section>
+
+    <hr>
+
+    <section id="success-checklist">
+      <h2>✅ Success Checklist</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Check</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DuckDNS domain resolves to your IP</td>
+            <td>✅ <code>nslookup</code> matches your public IP</td>
+          </tr>
+          <tr>
+            <td>PocketBase runs locally</td>
+            <td>✅ open <code>http://localhost:8090</code></td>
+          </tr>
+          <tr>
+            <td>Caddy runs without errors</td>
+            <td>✅ “serving initial configuration” message</td>
+          </tr>
+          <tr>
+            <td>HTTPS works externally</td>
+            <td>✅ Browser loads site with lock icon</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <section id="troubleshooting">
+      <h2>🧰 Troubleshooting</h2>
+
+      <details>
+        <summary>Port forwarding issues</summary>
+        <ul>
+          <li>If port 80 or 443 can’t be added, try deleting other rules first.</li>
+          <li>Some ISPs block port 80 — that’s fine, Caddy can still serve HTTPS on 443.</li>
+          <li>Test your open ports with <a href="https://www.canyouseeme.org" target="_blank" rel="noopener noreferrer">https://www.canyouseeme.org</a>.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Domain resolves but won’t connect</summary>
+        <pre><code class="language-bash">ping biblereading.duckdns.org</code></pre>
+        <ul>
+          <li>Ensure your local firewall allows incoming on 443.</li>
+          <li>Confirm Caddy is still running.</li>
+          <li>Verify your Mac’s local IP matches the port forwarding rule.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Caddyfile parse error: “wrong argument count or unexpected line ending after 'h1'”</summary>
+        <p>Make sure your Caddyfile doesn’t contain any trailing spaces or comments in the <code>tls</code> section. It should look exactly like:</p>
+        <pre><code>biblereading.duckdns.org {
+    reverse_proxy localhost:8090
+    tls {
+        dns duckdns &lt;your-token&gt;
+    }
+}</code></pre>
+      </details>
+
+      <details>
+        <summary>ERR_QUIC_PROTOCOL_ERROR in Chrome</summary>
+        <p>That’s an HTTP/3 issue, usually harmless. Try a hard refresh or disable QUIC in Chrome:</p>
+        <pre><code>chrome://flags/#enable-quic → Disabled</code></pre>
+      </details>
+    </section>
+
+    <hr>
+
+    <section id="keep-running">
+      <h2>🔄 Keeping It Running</h2>
+
+      <p>If you restart your Mac or your IP changes:</p>
+
+      <ol>
+        <li>Update your IP on DuckDNS:
+          <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=biblereading&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
+        </li>
+        <li>Restart Caddy:
+          <pre><code class="language-bash">sudo caddy run --config ./Caddyfile --adapter caddyfile</code></pre>
+        </li>
+        <li>Visit your domain again.</li>
+      </ol>
+
+      <p>For persistent setup, consider using <strong>Launchd</strong> (macOS) or <strong>systemd</strong> (Linux) to auto-start Caddy on boot.</p>
+    </section>
+
+    <hr>
+
+    <section id="recap">
+      <h2>🧠 Recap</h2>
+      <ul>
+        <li>A <strong>free dynamic DNS</strong> with DuckDNS</li>
+        <li>A <strong>reverse proxy and HTTPS certificate manager</strong> with Caddy</li>
+        <li>A <strong>secure, internet-accessible PocketBase instance</strong></li>
+      </ul>
+      <p>This pattern applies to any local web service — Node, Flask, Django, Go, etc.</p>
+    </section>
+
+    <section id="architecture">
+      <h3>Example Final Architecture</h3>
+      <pre><code>[Internet] ⇄ [DuckDNS Domain] ⇄ [Router Port 443] ⇄ [Caddy] ⇄ [PocketBase on 8090]</code></pre>
+    </section>
+
+  </main>
+
+</body>
+</html>

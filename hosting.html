@@ -316,39 +316,38 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
         <li>If you want to start pocketbase when your computer boots, add this file: 
           <code>~/Library/LaunchAgents/com.user.pocketbase.plist</code>.
           And its contents would be:
-          <code class="language-bash"><pre lang="xml"><?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-  <dict>
-    <key>Label</key>
-    <string>com.user.pocketbase</string>
+          <code class="language-bash"><pre lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+&nbsp; "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&nbsp; &lt;dict&gt;
+&nbsp; &nbsp; &lt;key&gt;Label&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;com.user.pocketbase&lt;/string&gt;
 
-    <key>ProgramArguments</key>
-    <array>
-      <string>/usr/local/bin/pocketbase</string>
-      <string>serve</string>
-      <string>--http=0.0.0.0:8090</string>
-      <string>--dir=/Users/billyeh/workspace/pb_data</string>
-    </array>
+&nbsp; &nbsp; &lt;key&gt;ProgramArguments&lt;/key&gt;
+&nbsp; &nbsp; &lt;array&gt;
+&nbsp; &nbsp; &nbsp; &lt;string&gt;/usr/local/bin/pocketbase&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &lt;string&gt;serve&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &lt;string&gt;--http=0.0.0.0:8090&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &lt;string&gt;--dir=/Users/billyeh/workspace/pb_data&lt;/string&gt;
+&nbsp; &nbsp; &lt;/array&gt;
 
-    <key>RunAtLoad</key>
-    <true/>
+&nbsp; &nbsp; &lt;key&gt;RunAtLoad&lt;/key&gt;
+&nbsp; &nbsp; &lt;true/&gt;
 
-    <key>KeepAlive</key>
-    <true/>
+&nbsp; &nbsp; &lt;key&gt;KeepAlive&lt;/key&gt;
+&nbsp; &nbsp; &lt;true/&gt;
 
-    <key>WorkingDirectory</key>
-    <string>/Users/billyeh/workspace/pocketbase</string>
+&nbsp; &nbsp; &lt;key&gt;WorkingDirectory&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;/Users/billyeh/workspace/pocketbase&lt;/string&gt;
 
-    <key>StandardOutPath</key>
-    <string>/Users/billyeh/logs/pocketbase.out.log</string>
+&nbsp; &nbsp; &lt;key&gt;StandardOutPath&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;/Users/billyeh/logs/pocketbase.out.log&lt;/string&gt;
 
-    <key>StandardErrorPath</key>
-    <string>/Users/billyeh/logs/pocketbase.err.log</string>
-  </dict>
-</plist>
-          </code></pre>
+&nbsp; &nbsp; &lt;key&gt;StandardErrorPath&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;/Users/billyeh/logs/pocketbase.err.log&lt;/string&gt;
+&nbsp; &lt;/dict&gt;
+&lt;/plist&gt;</code></pre>
       <p>
         You can customize the paths as desired.
         Run <code>launchctl load ~/Library/LaunchAgents/com.user.pocketbase.plist</code> to start it (or <code>unload</code> when making changes).
@@ -356,46 +355,45 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
         </li>
         <li>And for starting Caddy when your computer boots, you'll need to create the file <code>vim /Library/LaunchDaemons/com.user.caddy.plist</code>
           using your root user. It'll contain: 
-          <code><pre lang="xml"><?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.user.caddy</string>
+          <code><pre lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+&nbsp; "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+&nbsp; &nbsp; &lt;key&gt;Label&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;com.user.caddy&lt;/string&gt;
 
-    <key>ProgramArguments</key>
-    <array>
-        <string>/usr/local/bin/caddy</string>
-        <string>run</string>
-        <string>--config</string>
-        <string>/Users/billyeh/workspace/Caddyfile</string>
-        <string>--adapter</string>
-        <string>caddyfile</string>
-        <string>--environ</string>
-    </array>
+&nbsp; &nbsp; &lt;key&gt;ProgramArguments&lt;/key&gt;
+&nbsp; &nbsp; &lt;array&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;/usr/local/bin/caddy&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;run&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;--config&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;/Users/billyeh/workspace/Caddyfile&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;--adapter&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;caddyfile&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;--environ&lt;/string&gt;
+&nbsp; &nbsp; &lt;/array&gt;
 
-    <key>EnvironmentVariables</key>
-    <dict>
-        <key>CADDY_HOME</key>
-        <string>/usr/local/caddy</string>
-        <key>HOME</key>
-        <string>/usr/local/caddy</string>
-    </dict>
+&nbsp; &nbsp; &lt;key&gt;EnvironmentVariables&lt;/key&gt;
+&nbsp; &nbsp; &lt;dict&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;key&gt;CADDY_HOME&lt;/key&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;/usr/local/caddy&lt;/string&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;key&gt;HOME&lt;/key&gt;
+&nbsp; &nbsp; &nbsp; &nbsp; &lt;string&gt;/usr/local/caddy&lt;/string&gt;
+&nbsp; &nbsp; &lt;/dict&gt;
 
-    <key>RunAtLoad</key>
-    <true/>
+&nbsp; &nbsp; &lt;key&gt;RunAtLoad&lt;/key&gt;
+&nbsp; &nbsp; &lt;true/&gt;
 
-    <key>KeepAlive</key>
-    <true/>
+&nbsp; &nbsp; &lt;key&gt;KeepAlive&lt;/key&gt;
+&nbsp; &nbsp; &lt;true/&gt;
 
-    <key>StandardErrorPath</key>
-    <string>/var/log/caddy.err.log</string>
-    <key>StandardOutPath</key>
-    <string>/var/log/caddy.out.log</string>
-</dict>
-</plist>
-          </pre></code>
+&nbsp; &nbsp; &lt;key&gt;StandardErrorPath&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;/var/log/caddy.err.log&lt;/string&gt;
+&nbsp; &nbsp; &lt;key&gt;StandardOutPath&lt;/key&gt;
+&nbsp; &nbsp; &lt;string&gt;/var/log/caddy.out.log&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre></code>
 
         <p>
           You can again customize the home directories, but make sure they're defined and the root user can access them.

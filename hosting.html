@@ -199,11 +199,15 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
         <li><strong>Internal IP:</strong> your Mac’s local IP (e.g. <code>192.168.86.42</code>)</li>
         <li><strong>External port:</strong> <code>443</code></li>
         <li><strong>Internal port:</strong> <code>443</code></li>
-        <li><strong>Protocol:</strong> TCP</li>
+        <li><strong>Protocol:</strong> TCP/UDP</li>
         <li><strong>Device:</strong> select your Mac</li>
       </ul>
 
-      <p>If port 80 gives you “failed to add new rule”, skip it — HTTPS (443) is enough.</p>
+      <p>💡 If port 80 gives you “failed to add new rule”, skip it — HTTPS (443) is enough.</p>
+      <p>
+        ⚠️ If you don't use TCP/UDP and only choose TCP, you may run into a QUIC error. You can either enable UDP as well, or skip it.
+        But then you'll have to restrict Caddy to using only TCP, which is below in the troubleshooting section.
+      </p>
     </section>
 
     <hr>

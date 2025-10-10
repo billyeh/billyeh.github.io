@@ -308,9 +308,12 @@ INFO    http.log server running {"name": "srv0", "protocols": ["h1", "h2"]}</cod
     <section id="keep-running">
       <h2>🔄 Keeping It Running</h2>
 
-      <p>If you restart your Mac or your IP changes:</p>
-
       <ol>
+        <li>
+          If you want to update DuckDNS periodically with your IP address, run <code>crontab -e</code>
+          and add <code>*/5 * * * * curl -s "https://www.duckdns.org/update?domains=myproject&token=<token>&ip="</code>
+        </li>
+        </li>
         <li>Update your IP on DuckDNS:
           <pre><code class="language-bash">curl "https://www.duckdns.org/update?domains=myproject&amp;token=&lt;your-token&gt;&amp;ip="</code></pre>
         </li>

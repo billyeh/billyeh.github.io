@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+  </head>
+  <h1>Notes on problems encountered while deploying a local-first app, and potential solutions</h1>
+  <ol>
+    <li>Storing app state locally: for Flutter, Hive and Isar are older options, while Drift is a newer one.</li>
+    <li>Authentication: for Flutter, you can use Firebase Auth, Supabase Auth, or roll your own.</li>
+    <li>Backend server for storing state remotely: for Flutter, you can use something like PowerSync, Pocketbase, any IAAS provider, or Supabase.</li>
+    <li>Deploying the backend: you can use Coolify, which seems a little more batteries-included, or roll your own using a setup like Caddy and DuckDNS.</li>
+  </ol>
+</html>
